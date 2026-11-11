@@ -35,26 +35,3 @@ document.querySelectorAll('[data-photo]').forEach(b=>b.addEventListener('click',
 }));
 document.querySelector('.photo-close').addEventListener('click',()=>photoDialog.close());
 photoDialog.addEventListener('click',e=>{if(e.target===photoDialog)photoDialog.close()});
-
-const exploreItems=[
- {src:"assets/maquete-principal-nova.png",name:"Casa inteligente e garagem",desc:"Protótipo físico que ajuda a visualizar as possibilidades da automação residencial."},
- {src:"assets/maquete-amarela-nova.png",name:"Casa amarela",desc:"Outra maquete utilizada para demonstrar a integração entre sistemas embarcados e ambientes residenciais."},
- {src:"assets/esp32.png",name:"Microcontrolador ESP32",desc:"O componente que executa a programação e permite a comunicação sem fio com a interface de controle."}
-];
-let exploreCurrent=0;
-function selectExplore(i){
- exploreCurrent=i;const x=exploreItems[i];
- document.getElementById("explore-img").src=x.src;
- document.getElementById("explore-img").alt=x.name;
- document.getElementById("explore-name").textContent=x.name;
- document.getElementById("explore-description").textContent=x.desc;
- document.getElementById("explore-counter").textContent=`0${i+1} / 03`;
- document.querySelectorAll("[data-explore]").forEach(b=>{b.classList.toggle("active",Number(b.dataset.explore)===i);b.setAttribute("aria-pressed",String(Number(b.dataset.explore)===i));});
-}
-document.querySelectorAll("[data-explore]").forEach(b=>b.addEventListener("click",()=>selectExplore(Number(b.dataset.explore))));
-document.getElementById("explore-zoom").addEventListener("click",()=>{
- const x=exploreItems[exploreCurrent];
- document.getElementById("photo-large").src=x.src;
- document.getElementById("photo-caption").textContent=x.name;
- photoDialog.showModal();
-});
